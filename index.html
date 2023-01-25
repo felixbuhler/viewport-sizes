@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Your viewport is …</title>
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@700&family=Cormorant:ital@1&family=Inter:wght@500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --padding: 20px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: rgb(255, 255, 134);
+    }
+
+    header,
+    footer {
+      text-align: center;
+      width: 100%;
+      position: fixed;
+      padding: var(--padding) 0;
+      font-family: 'Cormorant', serif;
+      font-style: italic;
+      font-size: 20px;
+    }
+
+    footer {
+      bottom: 0px;
+    }
+
+    .numbers-wrapper {
+      display: block;
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .number {
+      font-family: 'Chivo Mono', monospace;
+      font-size: clamp(min(30vh, 10vw), 100%, max(30vh, 10vw));
+      line-height: 0.8em;
+      position: relative;
+    }
+
+    @media (max-height: 260px) {
+      :root {
+      --padding: 10px;
+    }
+      .number {
+
+        font-size: 25vh;
+
+      }
+    }
+
+    @media (max-height: 180px) {
+      .number {
+
+        font-size: 15vh;
+
+      }
+    }
+
+    .number#width {
+      margin-bottom: var(--padding);
+      padding-bottom: var(--padding);
+      border-bottom: 1px solid black;
+    }
+
+    .number::after,
+    .number::before {
+      content: 'Pixel';
+      font-size: 20px;
+      position: absolute;
+      font-family: 'Inter', sans-serif;
+
+
+      letter-spacing: 0;
+    }
+
+    .number::after {
+      right: 20px;
+    }
+
+    .number::before {
+      text-align: right;
+      left: 20px;
+    }
+
+    .number#width::before {
+      content: 'Width';
+    }
+
+    .number#height::before {
+      content: 'Height';
+    }
+  </style>
+  <script>
+    let viewportHeight = window.innerHeight;
+    let viewportWidth = window.innerWidth;
+
+
+
+    addEventListener("load", (event) => {
+      document.getElementById("width").innerHTML = viewportWidth;
+      document.getElementById("height").innerHTML = viewportHeight;
+    });
+    addEventListener("resize", (event) => {
+      viewportHeight = window.innerHeight;
+      viewportWidth = window.innerWidth;
+      console.log("Width is" + viewportHeight + ". Height is" + viewportWidth);
+      document.getElementById("width").innerHTML = viewportWidth;
+      document.getElementById("height").innerHTML = viewportHeight;
+    });
+
+  </script>
+</head>
+
+<body>
+  <header>Viewport Size</header>
+  <div class="numbers-wrapper">
+    <div class="number" id="width"></div>
+    <div class="number" id="height"></div>
+  </div>
+  <footer>Footer</footer>
+</body>
+
+</html>
